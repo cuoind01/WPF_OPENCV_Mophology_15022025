@@ -1,0 +1,128 @@
+﻿<Window x:Class="WPF_OPENCV_Morphology_2025.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_OPENCV_Morphology_2025"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Morphology" Height="600" Width="1000">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" Margin="5 2 5 2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <UniformGrid Margin="2" Rows="1" Columns="3">
+                        <Button 
+                            Command="{Binding CommandOpenFolder}"
+                            Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
+                        >
+                            <materialDesign:PackIcon 
+                                Kind="FolderImage"/>
+                        </Button>
+                        <Button 
+                            Command="{Binding CommandRunProgram}"
+                             Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
+                         >
+                            <materialDesign:PackIcon 
+                                Kind="Triangle"
+                                RenderTransformOrigin="0.5,0.5"
+                                                     >
+                                <materialDesign:PackIcon.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform></ScaleTransform>
+                                        <SkewTransform></SkewTransform>
+                                        <RotateTransform Angle="90"></RotateTransform>
+                                    </TransformGroup>
+                                </materialDesign:PackIcon.RenderTransform>
+                            </materialDesign:PackIcon>
+                        </Button>
+                    </UniformGrid>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <UniformGrid Rows="2">
+                        <GroupBox>
+                            <GroupBox.Header>
+                                <TextBlock 
+                                    Foreground="White"
+                                    FontWeight="Bold"
+                                    >Morphology Mode</TextBlock>
+                            </GroupBox.Header>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock>Mode:</TextBlock>
+                                <ComboBox
+                                    Background="LightGray"
+                                    ItemsSource="{Binding ItemsSourceMode}"
+                                    SelectedItem="{Binding SelectedItemMode}"
+                                    />
+                                <TextBlock>Iteration: </TextBlock>
+                                <materialDesign:DecimalUpDown
+                                    Value="{Binding Iteration}"
+                                    Minimum="0"
+                                    Maximum="100"
+                                    ValueStep="1"
+                                    />
+                            </StackPanel>
+                        </GroupBox>
+                        <GroupBox>
+                            <GroupBox.Header>
+                                <TextBlock 
+                                     Foreground="White"
+                                     FontWeight="Bold"
+                                     >Mophology Structure</TextBlock>
+                            </GroupBox.Header>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock>Shape:</TextBlock>
+                                <ComboBox
+                                    Background="LightGray"
+                                    ItemsSource="{Binding ItemsSourceShape}"
+                                    SelectedItem="{Binding SelectedItemShape}"
+                                    />
+                                <TextBlock>SizeX:</TextBlock>
+                                <materialDesign:DecimalUpDown
+                                    Value="{Binding SizeX}"
+                                    Minimum="1"
+                                    Maximum="99"
+                                    ValueStep="2"
+                                    />
+                                <TextBlock>SizeY:</TextBlock>
+                                <materialDesign:DecimalUpDown
+                                    Value="{Binding SizeY}"
+                                    Minimum="1"
+                                    Maximum="99"
+                                    ValueStep="2"
+                                    />
+                            </StackPanel>
+                        </GroupBox>
+                    </UniformGrid>
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <ComboBox
+                    Background="LightGray"
+                    ItemsSource="{Binding ItemsSourceImage}"
+                    SelectedItem="{Binding SelectedItemImage}"
+                    />
+            </Grid>
+            <Grid Grid.Row="1" Margin="2" Background="LightGray">
+                <Image
+                    Source="{Binding SourceImageMain}"
+                    />
+            </Grid>
+        </Grid>
+
+    </Grid>
+</Window>
